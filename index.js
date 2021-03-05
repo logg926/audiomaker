@@ -59,11 +59,11 @@ class AudioMaker {
           if (decodedData.numberOfChannels === 2) {
             floatData.push(Array.from(_self.interleave(decodedData.getChannelData(0), decodedData.getChannelData(1))));
           } else {
-            floatData.push(Array.from(decodedData.getChannelData(0)));
+            floatData.push(Array.from(_self.interleave(decodedData.getChannelData(0), decodedData.getChannelData(0))));
           }
         });
         let concatinatedArray = floatData.flat();
-        resolve(_self._exportAudio(new Float32Array(concatinatedArray),audioBuffers[0].numberOfChannels));
+        resolve(_self._exportAudio(new Float32Array(concatinatedArray),2));
       });
     });
   }
